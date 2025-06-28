@@ -1,0 +1,1 @@
+A simple and responsive Stopwatch web application built using HTML, CSS, and JavaScript. It allows users to start, pause, resume, and reset the timer with smooth UI interactions. Ideal for learning DOM manipulation and timing functions in JavaScript.
