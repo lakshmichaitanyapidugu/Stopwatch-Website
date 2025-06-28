@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stopwatch</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #FF6FD8, #3813C2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .stopwatch {
+      font-size: 4rem;
+      margin-bottom: 30px;
+      font-weight: bold;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .buttons button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      background: white;
+      color: #333;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .buttons button:hover {
+      transform: scale(1.05);
+      background: #ffdd57;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #f8f8f8;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Stopwatch</h1>
+  <div class="stopwatch" id="display">00:00:00</div>
+  <div class="buttons">
+    <button onclick="start()">Start</button>
+    <button onclick="pause()">Pause</button>
+    <button onclick="reset()">Reset</button>
+  </div>
+  <div class="footer">Made using HTML, CSS & JavaScript</div>
+
+  <script>
+    let timer;
+    let seconds = 0;
+    let minutes = 0;
+    let hours = 0;
+    let isRunning = false;
+
+    function updateDisplay() {
+      const display = document.getElementById("display");
+      const hr = hours < 10 ? "0" + hours : hours;
+      const min = minutes < 10 ? "0" + minutes : minutes;
+      const sec = seconds < 10 ? "0" + seconds : seconds;
+      display.textContent = `${hr}:${min}:${sec}`;
+    }
+
+    function start() {
+      if (!isRunning) {
+        isRunning = true;
+        timer = setInterval(() => {
+          seconds++;
+          if (seconds === 60) {
+            seconds = 0;
+            minutes++;
+          }
+          if (minutes === 60) {
+            minutes = 0;
+            hours++;
+          }
+          updateDisplay();
+        }, 1000);
+      }
+    }
+
+    function pause() {
+      clearInterval(timer);
+      isRunning = false;
+    }
+
+    function reset() {
+      clearInterval(timer);
+      isRunning = false;
+      seconds = 0;
+      minutes = 0;
+      hours = 0;
+      updateDisplay();
+    }
+
+    updateDisplay(); 
+  </script>
+
+</body>
+</html>
